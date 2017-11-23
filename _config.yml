@@ -4,10 +4,10 @@
 
 # Site
 title: Emlice's Blog
-subtitle:
-description: Emlice's Blog
+subtitle: Emlice's Blog
+description: Write the Code, Change the World 
 author: Emlice
-language: 
+language: zh-Hans
 timezone: 
 
 # URL
@@ -26,6 +26,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+ - 'av-core-mini-0.6.4.js'
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -72,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: nexT
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
