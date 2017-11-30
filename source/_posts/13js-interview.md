@@ -1,0 +1,57 @@
+---
+title: ' 13js-interview'
+date: 2017-11-30 08:55:25
+categories:
+ - 面试 
+tags:
+ - web前端
+ - interview issue
+---
+
+
+
+### 福州网龙 - web前端(p4,p5)
+
+`js编程题`
+
+```javascript
+run(
+    next => {
+        setTimeout(() => {
+            console.log(1);
+            next();
+        },1000);
+    },
+    next => {
+        console.log(2);
+        next();
+    },
+    next => {
+        console.log(3);
+        next();
+    }
+);
+// 运行结果
+// 1 2 3
+
+// 需求： run 函数可以添加任意个参数
+```
+
+`我的解法`
+
+```javascript
+// Promise
+function run (...args) {
+    const process = [].concat(...args);
+    return new Promise((resolve, reject) => {
+        if(!process.length) reject();
+        process[0](resolve);
+    }).then(() => {
+        var params =  process.slice(1);
+        run(params);
+    }).catch(err => {
+        console.log('执行完毕');
+    });
+}
+```
+
