@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="nodejs," />
 
 
 
@@ -79,17 +79,23 @@
 
 
 
-<meta name="description" content="Write the Code, Change the World">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="node.js中的非IO的异步API提供了四种方法，分别为setTimeOut(),setInterval(),setImmediate()以及process.nextTick()，四种方法实现原理相似，但达到的效果略有区别：">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细说setTimeout&#x2F;setImmediate&#x2F;process.nextTick的区别">
+<meta property="og:url" content="http://yoursite.com/2017/11/28/细说setTimeout-setImmediate-process-nextTick的区别/index.html">
 <meta property="og:site_name" content="Emlice&#39;s Blog">
-<meta property="og:description" content="Write the Code, Change the World">
+<meta property="og:description" content="node.js中的非IO的异步API提供了四种方法，分别为setTimeOut(),setInterval(),setImmediate()以及process.nextTick()，四种方法实现原理相似，但达到的效果略有区别：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-23T06:58:30.467Z">
+<meta property="og:image" content="http://ozuwcawh6.bkt.clouddn.com/171128001.png">
+<meta property="og:image" content="http://ozuwcawh6.bkt.clouddn.com/171128002.png">
+<meta property="og:image" content="http://ozuwcawh6.bkt.clouddn.com/171128003.png">
+<meta property="og:image" content="http://ozuwcawh6.bkt.clouddn.com/171128004.png">
+<meta property="og:updated_time" content="2017-11-28T06:01:03.153Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="Write the Code, Change the World">
+<meta name="twitter:title" content="细说setTimeout&#x2F;setImmediate&#x2F;process.nextTick的区别">
+<meta name="twitter:description" content="node.js中的非IO的异步API提供了四种方法，分别为setTimeOut(),setInterval(),setImmediate()以及process.nextTick()，四种方法实现原理相似，但达到的效果略有区别：">
+<meta name="twitter:image" content="http://ozuwcawh6.bkt.clouddn.com/171128001.png">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/28/细说setTimeout-setImmediate-process-nextTick的区别/"/>
 
 
 
 
 
-  <title>标签 | Emlice's Blog</title>
+  <title>细说setTimeout/setImmediate/process.nextTick的区别 | Emlice's Blog</title>
   
 
 
@@ -293,40 +299,185 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/28/细说setTimeout-setImmediate-process-nextTick的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Emlice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Emlice's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">标签</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 6 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/hexo/" style="font-size: 30px; color: #111">hexo</a> <a href="/tags/interview-issue/" style="font-size: 12px; color: #ccc">interview issue</a> <a href="/tags/nodejs/" style="font-size: 12px; color: #ccc">nodejs</a> <a href="/tags/tag/" style="font-size: 30px; color: #111">tag</a> <a href="/tags/web前端/" style="font-size: 12px; color: #ccc">web前端</a> <a href="/tags/有感/" style="font-size: 12px; color: #ccc">有感</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">细说setTimeout/setImmediate/process.nextTick的区别</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T12:01:43+08:00">
+                2017-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/28/细说setTimeout-setImmediate-process-nextTick的区别/" class="leancloud_visitors" data-flag-title="细说setTimeout/setImmediate/process.nextTick的区别">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>node.js中的非IO的异步API提供了四种方法，分别为setTimeOut(),setInterval(),setImmediate()以及process.nextTick()，四种方法实现原理相似，但达到的效果略有区别：</p>
+<a id="more"></a>
+<h2 id="一、事件循环Event-Loop"><a href="#一、事件循环Event-Loop" class="headerlink" title="一、事件循环Event Loop"></a>一、事件循环Event Loop</h2><p>首先，我们需要了解node.js的基于事件循环的事件模型，正是因为它才使得node.js中回调函数十分普遍，也正是基于此，node.js实现了单线程高效的异步IO（这里说的单线程主要说的是执行javascript代码部分的线程，而异步IO部分node.js其实还是利用线程池去执行的）。</p>
+<p>简单的讲就是，在node.js启动时，创建了一个类似while(true)的循环体，每次执行一次循环体称为一次tick，每个tick的过程就是查看是否有事件等待处理，如果有，则取出事件极其相关的回调函数并执行，然后执行下一次tick。所以，有如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A();</span><br><span class="line">B();</span><br><span class="line">C();</span><br></pre></td></tr></table></figure>
+<p>它的执行逻辑是，先询问事件观察者当前是否有任务需要执行？观察者回答“有”，于是取出A执行，A是否有回调函数？如果有（如果没有则继续询问当前是否有任务需要执行），则取出回调函数并执行(注意：回调函数的执行基本都是异步的，可能不止一个回调)，执行完回调后通过某种方式通知调用者，我执行完了，并把执行结果给你，你自己酌情处理吧，主函数不需要不断询问回调函数执行结果，回调函数会以通知的方式告知调用者我执行完了（don’t call me ,i will call you.），而这个过程主线程并不需要等待回调函数执行完成，它会继续向前执行，即再次询问观察者当前是否还有任务需要执行，重复上面的步骤。。。直到观察者回答没有了，线程结束。</p>
+<p>整个事件循环的逻辑如下图：</p>
+<img src="http://ozuwcawh6.bkt.clouddn.com/171128001.png" class="image" title="Tick流程图">
+<h2 id="二：setTimeOut-setInterval-setImmediate-以及process-nextTik"><a href="#二：setTimeOut-setInterval-setImmediate-以及process-nextTik" class="headerlink" title="二：setTimeOut(),setInterval(),setImmediate()以及process.nextTik()"></a>二：setTimeOut(),setInterval(),setImmediate()以及process.nextTik()</h2><p>这里面setTimeOut()与setInterval()除了执行频次外基本相同，都表示主线程执行完一定时间后立即执行，而setImmediate()与之十分相似，也表示主线程执行完成后立即执行。那么他们之间的区别是什么呢？</p>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"setTimeout"</span>);</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"setImmediate"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>两者都代表主线程完成后立即执行，其执行结果是不确定的，可能是setTimeout回调函数执行结果在前，也可能是setImmediate回调函数执行结果在前，但setTimeout回调函数执行结果在前的概率更大些，这是因为他们采用的观察者不同，setTimeout采用的是类似IO观察者，setImmediate采用的是check观察者，而process.nextTick()采用的是idle观察者。</p>
+<p><strong>三种观察者的优先级顺序是：idle观察者&gt;&gt;io观察者&gt;check观察者</strong></p>
+<p>process.nextTick()与setImmediate()和setTimeout()的区别如下：</p>
+<p>1、原始代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A();</span><br><span class="line">B();</span><br><span class="line">C();</span><br></pre></td></tr></table></figure>
+<p>它的执行顺序即代码顺序：</p>
+<img src="http://ozuwcawh6.bkt.clouddn.com/171128002.png" class="image" title="Event Loop">
+<p>2、process.nextTick()执行效果，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A();</span><br><span class="line">process.nextTick(B);</span><br><span class="line">C();</span><br></pre></td></tr></table></figure>
+<p>它的执行顺序如下：</p>
+<img src="http://ozuwcawh6.bkt.clouddn.com/171128003.png" class="image" title="Event Loop">
+<p>3、setImmediate()或者setTimeout()执行效果，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A();</span><br><span class="line">setImmediate(B);<span class="comment">//或者setTimeout(B,0);</span></span><br><span class="line">C();</span><br></pre></td></tr></table></figure>
+<p>它的执行顺序如下：</p>
+<img src="http://ozuwcawh6.bkt.clouddn.com/171128004.png" class="image" title="Event Loop">
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>process.nextTick()，效率最高，消费资源小，但会阻塞CPU的后续调用；<br>setTimeout()，精确度不高，可能有延迟执行的情况发生，且因为动用了红黑树，所以消耗资源大；<br>setImmediate()，消耗的资源小，也不会造成阻塞，但效率也是最低的。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/27/如何有效的阅读/" rel="next" title="如何有效的阅读">
+                <i class="fa fa-chevron-left"></i> 如何有效的阅读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/30/面试题锦集/" rel="prev" title="面试题锦集">
+                面试题锦集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -335,6 +486,12 @@
 
 
           
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTk3MC84NTM0"></div>
+    </div>
+  
+
 
         </div>
         
@@ -355,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -442,6 +608,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、事件循环Event-Loop"><span class="nav-number">1.</span> <span class="nav-text">一、事件循环Event Loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：setTimeOut-setInterval-setImmediate-以及process-nextTik"><span class="nav-number">2.</span> <span class="nav-text">二：setTimeOut(),setInterval(),setImmediate()以及process.nextTik()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -598,6 +780,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
