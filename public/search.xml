@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[面试题锦集]]></title>
     <url>%2F2017%2F11%2F30%2F%E9%9D%A2%E8%AF%95%E9%A2%98%E9%94%A6%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[福州网龙 - web前端(p4,p5)js编程题 1234567891011121314151617181920run( next =&gt; &#123; setTimeout(() =&gt; &#123; console.log(1); next(); &#125;,1000); &#125;, next =&gt; &#123; console.log(2); next(); &#125;, next =&gt; &#123; console.log(3); next(); &#125;);// 运行结果// 1 2 3// 需求： run 函数可以添加任意个参数 我的解法 12345678910111213// Promisefunction run (...args) &#123; const process = [].concat(...args); return new Promise((resolve, reject) =&gt; &#123; if(!process.length) reject(); process[0](resolve); &#125;).then(() =&gt; &#123; var params = process.slice(1); run(params); &#125;).catch(err =&gt; &#123; console.log('执行完毕'); &#125;);&#125;]]></content>
+    <content type="text"><![CDATA[福州网龙 - web前端(p4,p5)js编程题 1234567891011121314151617181920run( next =&gt; &#123; setTimeout(() =&gt; &#123; console.log(1); next(); &#125;,1000); &#125;, next =&gt; &#123; console.log(2); next(); &#125;, next =&gt; &#123; console.log(3); next(); &#125;);// 运行结果// 1 2 3// 需求： run 函数可以添加任意个参数 我的解法 | Emlice 12345678910111213// Promisefunction run (...args) &#123; const process = [].concat(...args); return new Promise((resolve, reject) =&gt; &#123; if(!process.length) reject(); process[0](resolve); &#125;).then(() =&gt; &#123; var params = process.slice(1); run(params); &#125;).catch(err =&gt; &#123; console.log('执行完毕'); &#125;);&#125;]]></content>
       <categories>
         <category>面试</category>
       </categories>

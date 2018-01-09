@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T08:55:25+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T08:55:00+08:00">
                 2017-11-30
               </time>
             
@@ -411,9 +411,8 @@
           
             <h3 id="福州网龙-web前端-p4-p5"><a href="#福州网龙-web前端-p4-p5" class="headerlink" title="福州网龙 - web前端(p4,p5)"></a>福州网龙 - web前端(p4,p5)</h3><p><code>js编程题</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">run(</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">            next();</span><br><span class="line">        &#125;,<span class="number">1000</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">        next();</span><br><span class="line">    &#125;,</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求： run 函数可以添加任意个参数</span></span><br></pre></td></tr></table></figure>
-<p><code>我的解法</code></p>
+<p><code>我的解法 | Emlice</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> process = [].concat(...args);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!process.length) reject();</span><br><span class="line">        process[<span class="number">0</span>](resolve);</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> params =  process.slice(<span class="number">1</span>);</span><br><span class="line">        run(params);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'执行完毕'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
           
         
       
@@ -1686,7 +1685,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

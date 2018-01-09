@@ -79,3 +79,12 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+  
+  
+
+# hexo-admin authentification
+admin:
+  username: Emlice
+  password_hash: $2a$10$VGsln7NtOrjUgohmDGHPPuAWfDBpc3ZsKO/BsIXrABWqhAwFK4Gp.
+  secret: Hello World
+  deployCommand: './admin_script/hexo-generate.sh'
