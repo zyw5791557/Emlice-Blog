@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Emlice&#39;s Blog">
 <meta property="og:description" content="福州网龙 - web前端(p4,p5)js编程题 1234567891011121314151617181920run(    next =&amp;gt; &amp;#123;        setTimeout(() =&amp;gt; &amp;#123;            console.log(1);            next();        &amp;#125;,1000);    &amp;#125;,    nex">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T06:00:58.498Z">
+<meta property="og:updated_time" content="2018-01-09T08:49:04.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题锦集">
 <meta name="twitter:description" content="福州网龙 - web前端(p4,p5)js编程题 1234567891011121314151617181920run(    next =&amp;gt; &amp;#123;        setTimeout(() =&amp;gt; &amp;#123;            console.log(1);            next();        &amp;#125;,1000);    &amp;#125;,    nex">
@@ -408,7 +408,7 @@
       
         <h3 id="福州网龙-web前端-p4-p5"><a href="#福州网龙-web前端-p4-p5" class="headerlink" title="福州网龙 - web前端(p4,p5)"></a>福州网龙 - web前端(p4,p5)</h3><p><code>js编程题</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">run(</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">            next();</span><br><span class="line">        &#125;,<span class="number">1000</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">        next();</span><br><span class="line">    &#125;,</span><br><span class="line">    next =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需求： run 函数可以添加任意个参数</span></span><br></pre></td></tr></table></figure>
-<p><code>我的解法 | Emlice</code></p>
+<p><code>我的解法 | Emlice | 张张张炒蛋</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> process = [].concat(...args);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!process.length) reject();</span><br><span class="line">        process[<span class="number">0</span>](resolve);</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> params =  process.slice(<span class="number">1</span>);</span><br><span class="line">        run(params);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'执行完毕'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -450,6 +450,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/几行-node-带你解决-CROS/" rel="prev" title="几行 node 带你解决 CROS">
+                几行 node 带你解决 CROS <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -532,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -554,7 +558,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
