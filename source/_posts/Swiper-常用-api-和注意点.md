@@ -6,7 +6,7 @@ categories: []
 date: 2018-01-09 17:12:00
 ---
 ### Swiper 初始化
-```
+```html
 <div class="swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">slider1</div>
@@ -15,11 +15,12 @@ date: 2018-01-09 17:12:00
   </div>
 </div>
 ```
-```
+```javascript
 var mySwiper = new Swiper('.swiper-container', {
 	autoplay: true,//可选选项，自动滑动
 })
 ```
+<!-- more -->
 
 
 ### 常用api
@@ -43,4 +44,3 @@ loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides�
 
 ### 重要！！！
 1.初始化的 Swiper 容器 id 必须保持唯一性。当一个页面存在多个 Swiper 并同时初始化的时候, 必须给不同的标识，不然初始化失败，切记切记！！！(哭。。。)
-

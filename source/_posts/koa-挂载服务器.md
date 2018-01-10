@@ -5,7 +5,7 @@ tags:
 categories: []
 date: 2018-01-09 17:08:00
 ---
-```
+```javascript
 const Koa = require('koa');
 const app = new Koa();
 const path = require('path');
