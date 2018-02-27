@@ -305,6 +305,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/24/node-js下mongoose简单操作-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Emlice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Emlice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/24/node-js下mongoose简单操作-md/" itemprop="url">node.js下mongoose简单操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-24T14:38:20+08:00">
+                2018-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/24/node-js下mongoose简单操作-md/" class="leancloud_visitors" data-flag-title="node.js下mongoose简单操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Mongoose API: <a href="http://mongoosejs.com/docs/api.html" target="_blank" rel="noopener">http://mongoosejs.com/docs/api.html</a></p>
+</blockquote>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连接 mongoose </span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> db       = mongoose.createConnection(<span class="string">'mongodb://127.0.0.1:27017/NodeJS'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="连接错误处理"><a href="#连接错误处理" class="headerlink" title="连接错误处理"></a>连接错误处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连接错误</span></span><br><span class="line">db.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="自定义表结构"><a href="#自定义表结构" class="headerlink" title="自定义表结构"></a>自定义表结构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Schema 结构</span></span><br><span class="line"><span class="keyword">var</span> mongooseSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    username : &#123;<span class="attr">type</span> : <span class="built_in">String</span>, <span class="attr">default</span> : <span class="string">'匿名用户'</span>&#125;,</span><br><span class="line">    title    : &#123;<span class="attr">type</span> : <span class="built_in">String</span>&#125;,</span><br><span class="line">    content  : &#123;<span class="attr">type</span> : <span class="built_in">String</span>&#125;,</span><br><span class="line">    time     : &#123;<span class="attr">type</span> : <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now&#125;,</span><br><span class="line">    age      : &#123;<span class="attr">type</span> : <span class="built_in">Number</span>&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="添加实例方法"><a href="#添加实例方法" class="headerlink" title="添加实例方法"></a>添加实例方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加 mongoose 实例方法</span></span><br><span class="line">mongooseSchema.methods.findbyusername = <span class="function"><span class="keyword">function</span>(<span class="params">username, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.model(<span class="string">'mongoose'</span>).find(&#123;<span class="attr">username</span>: username&#125;, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="添加静态方法"><a href="#添加静态方法" class="headerlink" title="添加静态方法"></a>添加静态方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加 mongoose 静态方法，静态方法在Model层就能使用</span></span><br><span class="line">mongooseSchema.statics.findbytitle = <span class="function"><span class="keyword">function</span>(<span class="params">title, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.model(<span class="string">'mongoose'</span>).find(&#123;<span class="attr">title</span>: title&#125;, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常见表实例"><a href="#常见表实例" class="headerlink" title="常见表实例"></a>常见表实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> mongooseModel = db.model(<span class="string">'mongoose'</span>, mongooseSchema);</span><br></pre></td></tr></table></figure>
+<h3 id="新增记录-save"><a href="#新增记录-save" class="headerlink" title="新增记录 | save"></a>新增记录 | save</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增加记录 基于 entity 操作</span></span><br><span class="line"><span class="keyword">var</span> doc = &#123;<span class="attr">username</span> : <span class="string">'emtity_demo_username'</span>, <span class="attr">title</span> : <span class="string">'emtity_demo_title'</span>, <span class="attr">content</span> : <span class="string">'emtity_demo_content'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> mongooseEntity = <span class="keyword">new</span> mongooseModel(doc);</span><br><span class="line">mongooseEntity.save(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'saved OK!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增加记录 基于model操作</span></span><br><span class="line"><span class="keyword">var</span> doc = &#123;<span class="attr">username</span> : <span class="string">'model_demo_username'</span>, <span class="attr">title</span> : <span class="string">'model_demo_title'</span>, <span class="attr">content</span> : <span class="string">'model_demo_content'</span>&#125;;</span><br><span class="line">mongooseModel.create(doc, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'save ok'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="修改记录-update"><a href="#修改记录-update" class="headerlink" title="修改记录 | update"></a>修改记录 | update</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改记录</span></span><br><span class="line">mongooseModel.update(conditions, update, options, callback);</span><br><span class="line"><span class="keyword">var</span> conditions = &#123;<span class="attr">username</span> : <span class="string">'model_demo_username'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> update     = &#123;<span class="attr">$set</span> : &#123;<span class="attr">age</span> : <span class="number">27</span>, <span class="attr">title</span> : <span class="string">'model_demo_title_update'</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">var</span> options    = &#123;<span class="attr">upsert</span> : <span class="literal">true</span>&#125;;</span><br><span class="line">mongooseModel.update(conditions, update, options, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'update ok!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="查询记录-find"><a href="#查询记录-find" class="headerlink" title="查询记录 | find"></a>查询记录 | find</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="comment">// 基于实例方法的查询</span></span><br><span class="line"><span class="keyword">var</span> mongooseEntity = <span class="keyword">new</span> mongooseModel(&#123;&#125;);</span><br><span class="line">mongooseEntity.findbyusername(<span class="string">'model_demo_username'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基于静态方法的查询</span></span><br><span class="line">mongooseModel.findbytitle(<span class="string">'emtity_demo_title'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mongoose find</span></span><br><span class="line"><span class="keyword">var</span> criteria = &#123;<span class="attr">title</span> : <span class="string">'emtity_demo_title'</span>&#125;; <span class="comment">// 查询条件</span></span><br><span class="line"><span class="keyword">var</span> fields   = &#123;<span class="attr">title</span> : <span class="number">1</span>, <span class="attr">content</span> : <span class="number">1</span>, <span class="attr">time</span> : <span class="number">1</span>&#125;; <span class="comment">// 待返回的字段</span></span><br><span class="line"><span class="keyword">var</span> options  = &#123;&#125;;</span><br><span class="line">mongooseModel.find(criteria, fields, options, <span class="function"><span class="keyword">function</span>(<span class="params">error, result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="删除记录-remove"><a href="#删除记录-remove" class="headerlink" title="删除记录 | remove"></a>删除记录 | remove</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除记录</span></span><br><span class="line"><span class="keyword">var</span> conditions = &#123;<span class="attr">username</span>: <span class="string">'emtity_demo_username'</span>&#125;;</span><br><span class="line">mongooseModel.remove(conditions, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'delete ok!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭数据库链接</span></span><br><span class="line">    db.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/filter引起点击卡顿问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1646,137 +1791,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/24/vedio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Emlice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar_back.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Emlice's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/24/vedio/" itemprop="url">vedio</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T14:47:05+08:00">
-                2017-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/24/vedio/" class="leancloud_visitors" data-flag-title="vedio">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>youtube</code><br><div class="video-container"><iframe src="//www.youtube.com/embed/Zlot0i3Zykw" frameborder="0" allowfullscreen></iframe></div></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1831,7 +1845,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1853,7 +1867,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
