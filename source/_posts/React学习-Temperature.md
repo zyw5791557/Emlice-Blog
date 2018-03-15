@@ -33,13 +33,13 @@ class Counter extends Component {
     }
     temperatureTranslate (mark,value) {
         if(mark === 'Centigrade') {
-            const computed = value * 1.8 + 32;
+            const computed = value !== '' ? value * 1.8 + 32 : '';
             this.setState({
                 CentigradeValue: this.tryConvert(value),
                 FahrenheitValue: this.tryConvert(computed)
             });
         } else {
-            const computed = (value - 32) / 1.8;
+            const computed = value !== '' ? (value - 32) / 1.8 : '';
             this.setState({
                 CentigradeValue: this.tryConvert(computed),
                 FahrenheitValue: this.tryConvert(value)
@@ -57,7 +57,18 @@ class Counter extends Component {
                 <Fahrenheit 
                     callback={ this.temperatureTranslate }
                     value={ this.state.FahrenheitValue } />
+                <Boil temperature={ this.state.CentigradeValue } />
             </div>
+        )
+    }
+}
+
+class Boil extends Component {
+    render () {
+        return (
+            <p>
+                { this.props.temperature >= 100 ? '水开啦~': '烧水中...' }
+            </p>
         )
     }
 }
